@@ -1,11 +1,11 @@
-dist: xenial
 language: python
-python: 3.7.2
-install:
-  - pip install -r requirements.txt
-script:
-  - cd breaking_brain/
-  - ./manage.py test
-  - cd ..
-  - black --diff --check -l 79 -S breaking_brain/ > black_report.txt
+python:
+  - "3.6"
 
+services:
+  - docker
+
+before_script: sudo -H pip install docker-compose
+
+script:
+  - docker-compose run app sh -c "python manage.py test && flake8"
