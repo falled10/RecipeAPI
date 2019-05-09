@@ -1,11 +1,11 @@
 dist: xenial
-languane: python
+language: python
 python: 3.7.2
-
-services:
-  - docker
-
-before_script: sudo -H pip install docker-compose
-
+install:
+  - pip install -r requirements.txt
 script:
-  - docker-compose run app sh -c "python manage.py test && flake8"
+  - cd breaking_brain/
+  - ./manage.py test
+  - cd ..
+  - black --diff --check -l 79 -S breaking_brain/ > black_report.txt
+
