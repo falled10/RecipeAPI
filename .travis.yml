@@ -1,3 +1,4 @@
+dist: xenial
 languane: python
 python:
   - "3.6"
